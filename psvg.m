@@ -1,4 +1,4 @@
-function psvg(svgFile, psize)
+function psvg(svgFile, psize, varargin)
 
 if nargin < 2, psize = [16 16]; end
 
@@ -8,7 +8,15 @@ ppdf(pdfFile, psize);
 
 pdf2svg(pdfFile, svgFile);
 
-processSvg(svgFile, @fixSubplotBackground, @beautifyColors);
+if nargin == 2
+
+    processSvg(svgFile, @fixSubplotBackground, @beautifyColors);
+    
+else
+    
+    processSvg(svgFile, varargin{:});
+    
+end
 
 beautifyGridLines(svgFile);
 
